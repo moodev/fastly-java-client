@@ -6,7 +6,6 @@ import com.moo.cdn.model.ServiceDetails;
 import com.moo.cdn.model.Version;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -17,7 +16,7 @@ import retrofit2.http.Path;
  * An interface for the Fastly API
  * See https://docs.fastly.com/api/
  */
-public interface Api {
+public interface FastlyApi {
 
     public final static String FASTLY_URL = "https://api.fastly.com";
     public final static String FASTLY_TEST_URL_SUFFIX = "global.prod.fastly.net";
