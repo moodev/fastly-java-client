@@ -22,9 +22,16 @@ Add this dependency to your project's POM:
 
     See http://square.github.io/retrofit/.
 
+    OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+            clientBuilder.networkInterceptors().add(chain -> {
+                Request request = chain.request().newBuilder().addHeader(FastlyApi.FASTLY_AUTH_HEADER, apiKey).build();
+                return chain.proceed(request);
+            });
+
     e.g.
     Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(FastlyApi.FASTLY_URL)
+                .client(clientBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
