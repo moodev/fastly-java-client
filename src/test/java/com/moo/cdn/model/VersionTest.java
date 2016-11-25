@@ -1,44 +1,45 @@
 package com.moo.cdn.model;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.net.URL;
+import java.text.ParseException;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-public class VersionTest {
+public class VersionTest extends AbstractModelTest {
 
-    private JsonObject versionDataObject;
     private Version version;
 
     @Before
     public void setUp() throws FileNotFoundException {
-        JsonParser parser = new JsonParser();
-        URL url = getClass().getResource("Version.json");
-        FileReader data = new FileReader(url.getPath());
-        versionDataObject = parser.parse(data).getAsJsonObject();
-        String versionDataString = versionDataObject.toString();
+        super.setUp();
+        version = gson.fromJson(dataObject.toString(), Version.class);
+    }
 
-        Gson gson = new GsonBuilder().create();
+    protected String getTestDataFile() {
+        return "Version.json";
+    }
 
-        version = gson.fromJson(versionDataString, Version.class);
+    protected Class getTestClass() {
+        return Version.class;
     }
 
     @Test
-    public void testBasicProperties() {
-        assertThat(version.getActive(), is(versionDataObject.get("active").getAsBoolean()));
-        //assertThat(version.getDeployed(), is(versionDataObject.get("deployed").getAsBoolean()));
-        //assertThat(version.getLocked(), is(versionDataObject.get("locked").getAsBoolean()));
-        assertThat(version.getNumber(), is(versionDataObject.get("number").getAsInt()));
-        assertThat(version.getServiceId(), is(versionDataObject.get("service_id").getAsString()));
+    public void testBasicProperties() throws ParseException {
+        assertThat(version.getActive(), is(dataObject.get("active").getAsBoolean()));
+        assertThat(version.getComment(), is(dataObject.get("comment").getAsString()));
+        assertThat(version.getCreatedAt(), is(dateFormat.parse(dataObject.get("created_at").getAsString())));
+        assertThat(version.getDeletedAt(), is(dateFormat.parse(dataObject.get("deleted_at").getAsString())));
+        assertThat(version.getDeployed(), is(dataObject.get("deployed").getAsBoolean()));
+        assertThat(version.getLocked(), is(dataObject.get("locked").getAsBoolean()));
+        assertThat(version.getNumber(), is(dataObject.get("number").getAsInt()));
+        assertThat(version.getServiceId(), is(dataObject.get("service_id").getAsString()));
+        assertThat(version.getStaging(), is(dataObject.get("staging").getAsBoolean()));
+        assertThat(version.getStaging(), is(dataObject.get("staging").getAsBoolean()));
+        assertThat(version.getUpdatedAt(), is(dateFormat.parse(dataObject.get("updated_at").getAsString())));
     }
 
 }
