@@ -4,6 +4,7 @@ import com.moo.cdn.model.Backend;
 import com.moo.cdn.model.Domain;
 import com.moo.cdn.model.Service;
 import com.moo.cdn.model.ServiceDetails;
+import com.moo.cdn.model.VCL;
 import com.moo.cdn.model.Version;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -38,7 +39,7 @@ public interface FastlyApi {
 
     // Domain
     @POST("/service/{service_id}/version/{version}/domain")
-    Call<Domain> createDomain(@Path("service_id") String serviceId, @Path("version") String version, @Body Domain name);
+    Call<Domain> createDomain(@Path("service_id") String serviceId, @Path("version") String version, @Body Domain domain);
 
     // Service
     @GET("/service/search")
@@ -53,6 +54,11 @@ public interface FastlyApi {
     @DELETE("/service/{id}")
     Call<Object> deleteService(@Path("id") String serviceId);
 
+
+    // VCL
+    @POST("/service/{service_id}/version/{version}/vcl")
+    Call<VCL> createVCL(@Path("service_id") String serviceId, @Path("version") String version, @Body VCL vcl);
+
     //Version
     @PUT("/service/{service_id}/version/{number}/activate")
     Call<Version> activateVersion(@Path("service_id") String serviceId, @Path("number") String version);
@@ -62,6 +68,9 @@ public interface FastlyApi {
 
     @PUT("/service/{service_id}/version/{version}/clone")
     Call<Version> cloneVersion(@Path("service_id") String serviceId, @Path("version") String version);
+
+    @GET("/service/{service_id}/version/{number}/validate")
+    Call<Object> validateVersion(@Path("service_id") String serviceId, @Path("number") String version);
 
 }
 
