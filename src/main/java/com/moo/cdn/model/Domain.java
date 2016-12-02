@@ -8,9 +8,12 @@ import com.google.gson.annotations.SerializedName;
 public class Domain {
 
     private String comment;
+
     private String name;
+
     @SerializedName("service_id")
     private String serviceId;
+
     private Integer version;
 
     public String getComment() {
