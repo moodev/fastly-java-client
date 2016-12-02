@@ -1,5 +1,6 @@
 package com.moo.cdn;
 
+import com.moo.cdn.model.ActionResult;
 import com.moo.cdn.model.Backend;
 import com.moo.cdn.model.Domain;
 import com.moo.cdn.model.Service;
@@ -52,8 +53,7 @@ public interface FastlyApi {
     Call<Service> createService(@Body Service service);
 
     @DELETE("/service/{id}")
-    Call<Object> deleteService(@Path("id") String serviceId);
-
+    Call<ActionResult> deleteService(@Path("id") String serviceId);
 
     // VCL
     @POST("/service/{service_id}/version/{version}/vcl")
@@ -70,7 +70,7 @@ public interface FastlyApi {
     Call<Version> cloneVersion(@Path("service_id") String serviceId, @Path("version") String version);
 
     @GET("/service/{service_id}/version/{number}/validate")
-    Call<Object> validateVersion(@Path("service_id") String serviceId, @Path("number") String version);
+    Call<ActionResult> validateVersion(@Path("service_id") String serviceId, @Path("number") String version);
 
 }
 
