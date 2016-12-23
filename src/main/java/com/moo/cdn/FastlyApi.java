@@ -94,7 +94,7 @@ public interface FastlyApi {
     @GET("/service/{service_id}/version/{version}/vcl/{name}")
     Call<VCL> getVCL(@Path("service_id") String serviceId, @Path("version") String version, @Path("name") String name);
 
-    @GET("/service/{service_id}/version/{version}/vcl/generated_vcl")
+    @GET("/service/{service_id}/version/{version}/generated_vcl")
     Call<VCL> getGeneratedVCL(@Path("service_id") String serviceId, @Path("version") String version);
 
     @POST("/service/{service_id}/version/{version}/vcl")
