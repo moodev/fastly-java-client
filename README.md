@@ -7,8 +7,9 @@ Java 8
 
 ### Using with Maven
 
-TODO: publish to public repository....
-Add this dependency to your project's POM:
+Build and publish to your local repository. (I have not yet published publically to the public Nexus Repository)
+
+Then add this dependency to your project's POM:
 
     <dependency>
         <groupId>com.moo.cdn</groupId>
@@ -24,11 +25,14 @@ Add this dependency to your project's POM:
 
     OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
             clientBuilder.networkInterceptors().add(chain -> {
-                Request request = chain.request().newBuilder().addHeader(FastlyApi.FASTLY_AUTH_HEADER, apiKey).build();
+                Request request = chain.request()
+                    .newBuilder()
+                    .addHeader(FastlyApi.FASTLY_AUTH_HEADER, apiKey)
+                    .build();
                 return chain.proceed(request);
             });
 
-    e.g.
+    
     Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(FastlyApi.FASTLY_URL)
                 .client(clientBuilder.build())
